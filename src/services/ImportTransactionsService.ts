@@ -1,5 +1,4 @@
 import csvParse from 'csv-parse';
-import path from 'path';
 import fs from 'fs';
 
 import { getCustomRepository, getRepository, In } from 'typeorm';

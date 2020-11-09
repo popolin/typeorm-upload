@@ -3,8 +3,6 @@ import multer from 'multer';
 import { getCustomRepository } from 'typeorm';
 import uploadConfig from '../config/upload';
 
-import Transaction from '../models/Transaction';
-
 import TransactionsRepository from '../repositories/TransactionsRepository';
 import CreateTransactionService from '../services/CreateTransactionService';
 import DeleteTransactionService from '../services/DeleteTransactionService';
