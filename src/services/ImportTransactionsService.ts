@@ -67,16 +67,20 @@ class ImportTransactionsService {
   ): Promise<Category[]> {
     const categoriesReposigory = getRepository(Category);
 
+    const noDuplicatedCategories = categories.filter(
+      (category, index) => categories.indexOf(category) === index,
+    );
+
     const registeredCategories = await categoriesReposigory.find({
-      where: { title: In(categories) },
+      where: { title: In(noDuplicatedCategories) },
     });
 
     const registeredCategoriesTitle = registeredCategories.map(
       category => category.title,
     );
-    const addCategoryTitles = categories
-      .filter(category => !registeredCategoriesTitle.includes(category))
-      .filter((category, index) => categories.indexOf(category) === index);
+    const addCategoryTitles = noDuplicatedCategories.filter(
+      category => !registeredCategoriesTitle.includes(category),
+    );
 
     const newCategories = categoriesReposigory.create(
       addCategoryTitles.map(title => ({ title })),
